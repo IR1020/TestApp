@@ -8,31 +8,35 @@ use App\Models\Number;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $pass = 0;
         $name = $request->input('name');
         $p = $request->input('pass');
-        if($p != ""){$pass = (int)$p;}
-        
+        if ($p != "") {
+            $pass = (int)$p;
+        }
+
         $user = new User();
-        
-        if($user->userCheck($name,$pass)==true){
+
+        if ($user->userCheck($name, $pass) == true) {
             $id = $user->generateId();
-            $user->tableInsert($id,$name,$pass);
-            
-            $user->User($id,$name,$pass);
+            $user->tableInsert($id, $name, $pass);
+
+            $user->User($id, $name, $pass);
             $number = new Number(0);
-            $request->session('number',$number);
-            $request->session('user',$user);
-            return view('loginResult',compact('user','number'));
+            $request->session('number', $number);
+            $request->session('user', $user);
+            return view('loginResult', compact('user', 'number'));
         }
         $number = new Number(1);
-        $request->session('number',$number);
-        $request->session('user',$user);
-        return view('loginResult',compact('user','number'));
+        $request->session('number', $number);
+        $request->session('user', $user);
+        return view('loginResult', compact('user', 'number'));
     }
 }

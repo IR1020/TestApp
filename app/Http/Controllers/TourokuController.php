@@ -8,39 +8,43 @@ use App\Models\Number;
 
 class TourokuController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('touroku');
     }
 
-    public function touroku(Request $request){
+    public function touroku(Request $request)
+    {
         $pass = 0;
         $name = $request->input('name');
         $p = $request->input('pass');
-        if($p != ""){$pass = (int)$p;}
-        
+        if ($p != "") {
+            $pass = (int)$p;
+        }
+
         $user = new User();
-        
-        if($user->userCheck($name,$pass)==true){
+
+        if ($user->userCheck($name, $pass) == true) {
             $id = $user->generateId();
-            $user->tableInsert($id,$name,$pass);
-            
-            $user->User($id,$name,$pass);
+            $user->tableInsert($id, $name, $pass);
+
+            $user->User($id, $name, $pass);
             $number = new Number(0);
-            $request->session('number',$number);
-            $request->session('user',$user);
-            return view('tourokuResult',compact('user','number'));
+            $request->session('number', $number);
+            $request->session('user', $user);
+            return view('tourokuResult', compact('user', 'number'));
         }
         $number = new Number(1);
-        $request->session('number',$number);
-        return view('tourokuResult',compact('number'));
-        
+        $request->session('number', $number);
+        return view('tourokuResult', compact('number'));
+
         // $isFlag = 0;
         // if($a!=0)
         // if(!($a==0))
         // if(!($user->userCheck($name,$pass))){
         //     $id = $user->generateId();
         //     $user->tableInsert($id,$name,$pass);
-            
+
         //     $user->User($id,$name,$pass);
         //     $isFlag = 0;
         //     $number = new Number($isFlag);
