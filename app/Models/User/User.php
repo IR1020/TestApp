@@ -46,4 +46,12 @@ class User extends Model
             'pass'=>$pass
         ]);
     }
+    
+    // public function tableInsert($id,$name,$pass){
+    //     DB::table('users')->insert([
+    //         'id'=>$id,
+    //         'name'=>$name,
+    //         'pass'=>$pass
+    //     ]);
+    // }
 }

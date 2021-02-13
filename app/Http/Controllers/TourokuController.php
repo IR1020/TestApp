@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User\User;
-use App\Models\Number;
+use App\Models\Flag;
 
 class TourokuController extends Controller
 {
@@ -23,20 +23,21 @@ class TourokuController extends Controller
         }
 
         $user = new User();
+        $isFlag = 0;
 
-        if ($user->userCheck($name, $pass) == true) {
+        if ($user->userCheck($name, $pass)) {
             $id = $user->generateId();
             $user->tableInsert($id, $name, $pass);
 
             $user->User($id, $name, $pass);
-            $number = new Number(0);
-            $request->session('number', $number);
+            
+            $flag = new Flag($isFlag);
             $request->session('user', $user);
-            return view('tourokuResult', compact('user', 'number'));
+            return view('tourokuResult', compact('user', 'flag'));
         }
-        $number = new Number(1);
-        $request->session('number', $number);
-        return view('tourokuResult', compact('number'));
+        $isFlag = 1;
+        $flag = new Flag($isFlag);
+        return view('tourokuResult', compact('flag'));
 
         // $isFlag = 0;
         // if($a!=0)

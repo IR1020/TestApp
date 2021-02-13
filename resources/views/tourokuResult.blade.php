@@ -8,7 +8,7 @@
 
 <body>
     <h1>◆SNS◆</h1>
-    @if($number->getNumber() == 0)
+    @if($flag->getFlag())
     <p>ユーザー登録が完了しました。<br>
         ようこそ　{{$user->getName()}}さん</p>
     <a href="{{ url('/MyPage') }}">マイページへ</a>
