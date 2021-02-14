@@ -8,18 +8,18 @@ use App\Models\Number;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function get()
     {
         return view('login');
     }
 
-    public function login(Request $request)
+    public function post(Request $request)
     {
-        $pass = 0;
+        $pass=0;
         $name = $request->input('name');
         $p = $request->input('pass');
         if ($p != "") {
-            $pass = (int)$p;
+            $pass=(int)$p;
         }
 
         $user = new User();

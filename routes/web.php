@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'App\Http\Controllers\TopPageController@index');
+Route::get('/', 'App\Http\Controllers\TopPageController@get');
 
-Route::get('/touroku', 'App\Http\Controllers\TourokuController@index');
-Route::post('/touroku', 'App\Http\Controllers\TourokuController@touroku');
+Route::get('/touroku', 'App\Http\Controllers\TourokuController@get');
+Route::post('/touroku', 'App\Http\Controllers\TourokuController@post');
 
-Route::get('/login', 'App\Http\Controllers\LoginController@index');
-Route::post('/login', 'App\Http\Controllers\LoginController@login');
+Route::get('/login', 'App\Http\Controllers\LoginController@get');
+Route::post('/login', 'App\Http\Controllers\LoginController@post');
 
-Route::get('/mypage', 'App\Http\Controllers\MyPageController@index');
+Route::get('/mypage', 'App\Http\Controllers\MyPageController@get');

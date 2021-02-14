@@ -8,35 +8,34 @@ use App\Models\Flag;
 
 class TourokuController extends Controller
 {
-    public function index()
+    public function get()
     {
         return view('touroku');
     }
 
-    public function touroku(Request $request)
+    public function post(Request $request)
     {
-        $pass = 0;
-        $name = $request->input('name');
-        $p = $request->input('pass');
-        if ($p != "") {
-            $pass = (int)$p;
-        }
+        $name=$request->input('name');
+        $pass=$request->input('pass');
+        //if ($p != "") {$pass = (int)$p;}
 
         $user = new User();
-        $isFlag = 0;
+        $isFlag=0;
 
         if ($user->userCheck($name, $pass)) {
-            $id = $user->generateId();
-            $user->tableInsert($id, $name, $pass);
-
-            $user->User($id, $name, $pass);
+            $user->name=$name;
+            $user->pass=$pass;
+            $user->save();
             
-            $flag = new Flag($isFlag);
+            $id=User::where('name',$name)->where('pass',$pass)->value('id');
+            $user->User($id,$name,$pass);
+            
+            $flag=new Flag($isFlag);
             $request->session('user', $user);
             return view('tourokuResult', compact('user', 'flag'));
         }
-        $isFlag = 1;
-        $flag = new Flag($isFlag);
+        $isFlag=1;
+        $flag=new Flag($isFlag);
         return view('tourokuResult', compact('flag'));
 
         // $isFlag = 0;
@@ -45,17 +44,5 @@ class TourokuController extends Controller
         // if(!($user->userCheck($name,$pass))){
         //     $id = $user->generateId();
         //     $user->tableInsert($id,$name,$pass);
-
-        //     $user->User($id,$name,$pass);
-        //     $isFlag = 0;
-        //     $number = new Number($isFlag);
-        //     $request->session('number',$number);
-        //     $request->session('user',$user);
-        //     return view('tourokuResult',compact('user','number'));
-        // }
-        // $isFlag = 1;
-        // $number = new Number($isFlag);
-        // $request->session('number',$number);
-        // return view('tourokuResult',compact('number'));
     }
 }
