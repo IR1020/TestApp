@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User\User;
-use App\Models\Flag;
+//use App\Models\Flag;
 
 class TourokuController extends Controller
 {
@@ -15,28 +15,30 @@ class TourokuController extends Controller
 
     public function post(Request $request)
     {
+        $this->validate($request,[
+            'name'=>'required',
+            'pass'=>'required|unique:users,pass',
+        ]);
         $name=$request->input('name');
         $pass=$request->input('pass');
         //if ($p != "") {$pass = (int)$p;}
+        //$isFlag=0;
 
         $user = new User();
-        $isFlag=0;
-
-        if ($user->userCheck($name, $pass)) {
-            $user->name=$name;
-            $user->pass=$pass;
-            $user->save();
+        $user->name=$name;
+        $user->pass=$pass;
+        $user->save();
             
-            $id=User::where('name',$name)->where('pass',$pass)->value('id');
-            $user->User($id,$name,$pass);
+        $id=User::where('name',$name)->where('pass',$pass)->value('id');
+        $user->User($id,$name,$pass);
             
-            $flag=new Flag($isFlag);
-            $request->session('user', $user);
-            return view('tourokuResult', compact('user', 'flag'));
-        }
-        $isFlag=1;
-        $flag=new Flag($isFlag);
-        return view('tourokuResult', compact('flag'));
+        //$flag=new Flag($isFlag);
+        $request->session('user', $user);
+        return view('tourokuResult', compact('user'));
+        
+        // $isFlag=1;
+        // $flag=new Flag($isFlag);
+        // return view('tourokuResult', compact('flag'));
 
         // $isFlag = 0;
         // if($a!=0)

@@ -3,7 +3,7 @@
 namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 class User extends Model
 {
@@ -21,10 +21,10 @@ class User extends Model
     public function getName(){return $this->name;}
     public function getPass(){return $this->pass;}
     
-    public function userCheck($name,$pass){
-        if($name!="" && $pass!=""){return true;}
-        else return false;
-    }
+    // public function userCheck($name,$pass){
+    //     if($name!="" && $pass!=""){return true;}
+    //     else return false;
+    // }
     
     // public function generateId(){
     //     $id = mt_rand(10000000,99999999);
