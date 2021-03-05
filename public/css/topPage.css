@@ -6,7 +6,7 @@ body {
     background-size: cover;
 }
 
-.setsumei{
+.TopDescription{
     padding-top:130px;
     color: #007bff;
     /* color: rgb(64, 120, 153); */
@@ -14,22 +14,22 @@ body {
     justify-content: center;
 }
 
-div#setsumei{
+div.DescriptionName{
     display: flex;
     flex-direction: column;
     margin-right: 100px;
 }
 
-h1#setsumei{
+h1.DescriptionName{
     font-size: 30px;
 }
 
-p#setsumei{
+p.Description{
     color: black;
     font-size: 18px;
 }
 
-.serviceMenu{
+.ServiceMenu{
     color: #007bff;
     display: flex;
     justify-content: space-around;
@@ -37,7 +37,9 @@ p#setsumei{
 }
 
 .btn01 {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    text-decoration:none;
     background-color: #3169d1;
     color: #fff !important;
     cursor: pointer;
